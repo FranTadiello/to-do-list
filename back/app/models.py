@@ -22,6 +22,6 @@ class Task(Base):
     descricao = Column(String)
     status = Column(String, default="pendente")
     data_criacao = Column(DateTime, default=datetime.utcnow)
-
     user_id = Column(Integer, ForeignKey("users.id"))
+
     owner = relationship("User", back_populates="tasks")
