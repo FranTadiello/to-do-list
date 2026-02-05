@@ -1,5 +1,5 @@
 import api from "../api/api";
-import type{ LoginData, LoginResponse } from "../types/user";
+import type{ LoginData, LoginResponse, RegisterData } from "../types/user";
 
 export const login = async (data: LoginData): Promise<LoginResponse> => {
   const formData = new URLSearchParams();
@@ -9,4 +9,10 @@ export const login = async (data: LoginData): Promise<LoginResponse> => {
   const response = await api.post<LoginResponse>("/auth/login", formData);
 
   return response.data;
+};
+
+export const register = async (
+  data: RegisterData
+): Promise<void> => {
+  await api.post("/auth/register", data);
 };

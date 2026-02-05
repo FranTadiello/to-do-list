@@ -9,25 +9,20 @@ import {
   Link
 } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
-import { login } from "../services/auth.service";
+import { useAuth } from "../context/authContext";
 
 function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const responseToken = await login({
-        username: email,
-        password,
-      });
-
-      localStorage.setItem("token", responseToken.access_token);
-      alert("Login realizado com sucesso!");
+      await login(email, password);
       navigate("/tasks");
     } catch (error) {
       alert("Erro ao fazer login");
@@ -69,7 +64,7 @@ function Login() {
         justifyContent="center"
         alignItems="center"
       >
-        <Paper elevation={6}  sx={{ backgroundColor: "gainsboro", p: 4, width: 360, borderRadius: 3, }}>
+        <Paper elevation={6} sx={{ backgroundColor: "gainsboro", p: 4, width: 360, borderRadius: 3, }}>
           <Typography variant="h5" textAlign="center" mb={3} fontWeight="bold">
             Login
           </Typography>

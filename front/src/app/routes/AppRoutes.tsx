@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "../pages/login";
 import Tasks from "../pages/task";
 import { PrivateRoute } from "./PrivateRoute";
+import Register from "../pages/register";
 
 export function AppRoutes() {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -22,8 +23,9 @@ export function AppRoutes() {
 
         <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/tasks"
+        <Route path="/register" element={<Register />} />
+
+        <Route path="/tasks"
           element={
             <PrivateRoute>
               <Tasks />
