@@ -1,7 +1,13 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
+from enum import Enum
 
+class TaskStatus(str, Enum):
+    pendente = "pendente"
+    em_andamento = "em andamento"
+    concluida = "concluida"
+    
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
@@ -18,7 +24,7 @@ class UserResponse(BaseModel):
 class TaskBase(BaseModel):
     titulo: str
     descricao: str | None = None
-    status: str | None = "pendente"
+    status: TaskStatus = TaskStatus.pendente
 
 
 class TaskResponse(TaskBase):
@@ -31,4 +37,4 @@ class TaskResponse(TaskBase):
 class TaskUpdate(BaseModel):
     titulo: Optional[str] = None
     descricao: Optional[str] = None
-    status: Optional[str] = None
+    status: Optional[TaskStatus] = None
