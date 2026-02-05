@@ -1,14 +1,18 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from .database import engine
 from .models import Base
-from .routes import auth
+from .controller.routes import auth_controller
+from .config.security import get_current_user
 
 app = FastAPI(title="To-Do API")
 
 Base.metadata.create_all(bind=engine)
 
-app.include_router(auth.router)
+app.include_router(auth_controller.router)
 
 @app.get("/")
-def root():
-    return {"message": "hello"}
+def read_users_me(current_user = Depends(get_current_user)):
+    return {
+        "id": current_user.id,
+        "email": current_user.email
+    }
