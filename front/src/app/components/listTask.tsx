@@ -1,11 +1,11 @@
 import { TaskItem } from "./taskItem";
-import type { Task } from "../types/task";
+import type { Task, TaskUpdate } from "../types/task";
 import { Typography } from "@mui/material";
 
 interface TaskListProps {
     tasks: Task[];
     onDelete: (id: number) => void;
-    onEdit: (id: number) => void;
+    onEdit: (id: number, data: TaskUpdate) => void;
 }
 
 export function TaskList({ tasks, onDelete, onEdit }: TaskListProps) {
@@ -14,22 +14,22 @@ export function TaskList({ tasks, onDelete, onEdit }: TaskListProps) {
     }
 
     return (
-        <>     
-                <Typography
-                    variant="h6"
-                    fontWeight="bold"
-                    sx={{ textAlign: "left", mb: 1 }}
-                >
-                    Minhas Tasks
-                </Typography>
-                {tasks.map((task) => (
-                    <TaskItem
-                        key={task.id}
-                        task={task}
-                        onDelete={onDelete}
-                        onEdit={onEdit}
-                    />
-                ))}
+        <>
+            <Typography
+                variant="h6"
+                fontWeight="bold"
+                sx={{ textAlign: "left", mb: 1 }}
+            >
+                Minhas Tasks
+            </Typography>
+            {tasks.map((task) => (
+                <TaskItem
+                    key={task.id}
+                    task={task}
+                    onDelete={onDelete}
+                    onEdit={onEdit}
+                />
+            ))}
         </>
     );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {Box} from "@mui/material";
-import { createTask, getTasks } from "../services/task.service";
-import type { Task } from "../types/task";
+import { createTask, getTasks, updateTask } from "../services/task.service";
+import type { Task, TaskUpdate } from "../types/task";
 import { CreateTask } from "../components/createTask";
 import { TaskList } from "../components/listTask";
 
@@ -24,14 +24,21 @@ function Tasks() {
    const handleDelete = (id: number) => {
 
   };
-   const handleEdit = (id: number) => {
+   const handleUpdate = async (
+  id: number,
+  data: TaskUpdate
+) => {
+  const updated = await updateTask(id, data);
 
-  };
+  setTasks((prev) =>
+    prev.map((t) => (t.id === id ? updated : t))
+  );
+};
 
   return (
     <Box p={4}>
       <CreateTask onCreate={handleCreate} />
-       <TaskList tasks={tasks} onDelete={handleDelete} onEdit={handleEdit}/>
+       <TaskList tasks={tasks} onDelete={handleDelete} onEdit={handleUpdate}/>
     </Box>
   );
 }
