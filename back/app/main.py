@@ -4,8 +4,11 @@ from .models import Base
 from .controller.routes import auth_controller
 from .controller.routes import task_controller
 from .config.security import get_current_user
+from .config.cors import setup_cors
 
 app = FastAPI(title="To-Do API")
+
+setup_cors(app)
 
 Base.metadata.create_all(bind=engine)
 

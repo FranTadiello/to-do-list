@@ -1,9 +1,14 @@
+import Login from "./app/pages/login";
+import Tasks from "./app/pages/task";
+
 function App() {
-  return (
-    <div>
-      <h1>To do list</h1>
-    </div>
-  );
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    return <Login />;
+  }
+
+  return <Tasks />;
 }
 
 export default App;
