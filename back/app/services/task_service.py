@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 from ..schemas.schemas import TaskBase, TaskUpdate
-from ..repositories.task_repository import create_task, get_tasks_by_user, get_task_by_id_and_user, update_task
+from ..repositories.task_repository import create_task, get_tasks_by_user, get_task_by_id_and_user, update_task, delete_task
 from ..models import Task
 
 def create_user_task(
@@ -32,3 +32,19 @@ def update_user_task(
         )
 
     return update_task(db, task, task_data)
+
+
+def delete_user_task(
+    db: Session,
+    task_id: int,
+    user_id: int
+) -> None:
+    task = get_task_by_id_and_user(db, task_id, user_id)
+
+    if not task:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Task not found"
+        )
+
+    delete_task(db, task)

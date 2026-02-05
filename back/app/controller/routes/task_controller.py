@@ -4,7 +4,7 @@ from typing import List
 from ...database import get_db
 from ...schemas.schemas import TaskBase, TaskResponse, TaskUpdate
 from ...config.security import get_current_user
-from ...services.task_service import create_user_task, list_user_tasks, update_user_task
+from ...services.task_service import create_user_task, list_user_tasks, update_user_task, delete_user_task
 from ...models import User
 
 router = APIRouter(prefix="/task", tags=["Task"])
@@ -33,10 +33,7 @@ def create_task(
     )
 
 
-@router.patch(
-    "/{task_id}",
-    response_model=TaskResponse
-)
+@router.patch("/{task_id}", response_model=TaskResponse)
 def update_task(
     task_id: int,
     task_data: TaskUpdate,
@@ -48,4 +45,17 @@ def update_task(
         task_id=task_id,
         user_id=current_user.id,
         task_data=task_data
+    )
+    
+    
+@router.delete("/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_task(
+    task_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    delete_user_task(
+        db=db,
+        task_id=task_id,
+        user_id=current_user.id
     )
