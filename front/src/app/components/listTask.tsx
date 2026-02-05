@@ -5,12 +5,12 @@ import { Typography } from "@mui/material";
 interface TaskListProps {
     tasks: Task[];
     onDelete: (id: number) => void;
-    onEdit: (id: number, data: TaskUpdate) => void;
+    onUpDate: (id: number, data: TaskUpdate) => void;
 }
 
-export function TaskList({ tasks, onDelete, onEdit }: TaskListProps) {
+export function TaskList({ tasks, onDelete, onUpDate }: TaskListProps) {
     if (tasks.length === 0) {
-        return <p>Nenhuma task cadastrada</p>;
+        return <Typography>Nenhuma task cadastrada</Typography>;
     }
 
     return (
@@ -27,7 +27,7 @@ export function TaskList({ tasks, onDelete, onEdit }: TaskListProps) {
                     key={task.id}
                     task={task}
                     onDelete={onDelete}
-                    onEdit={onEdit}
+                    onUpDate={onUpDate}
                 />
             ))}
         </>

@@ -21,10 +21,15 @@ def register_user(user: schemas.UserCreate, db: Session):
 
 def login_user(form_data, db: Session):
     user = auth_repository.get_user_by_email(db, form_data.username)
-    if not user or not verify_password(form_data.password, user.password):
+    if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Credenciais inválidas"
+            detail="Email nao cadastrado"
+        )
+    if not verify_password(form_data.password, user.password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Senha inválida"
         )
 
     access_token = create_access_token(

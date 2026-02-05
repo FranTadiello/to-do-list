@@ -24,8 +24,9 @@ function Login() {
     try {
       await login(email, password);
       navigate("/tasks");
-    } catch (error) {
-      alert("Erro ao fazer login");
+    } catch (e) {      
+      const err = e as any;
+      alert(err.response.data.detail);
     }
   };
 

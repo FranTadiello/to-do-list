@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import {Box} from "@mui/material";
-import { createTask, getTasks, updateTask } from "../services/task.service";
+import { Box } from "@mui/material";
+import { createTask, deleteTask, getTasks, updateTask } from "../services/task.service";
 import type { Task, TaskUpdate } from "../types/task";
 import { CreateTask } from "../components/createTask";
 import { TaskList } from "../components/listTask";
+import { useNavigate } from "react-router-dom";
 
 
 function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-    getTasks().then(setTasks);
+  useEffect(() => {
+    getTasks().then(setTasks).catch(e =>{
+      if (e.status == 401) navigate("/login");
+    });
   }, []);
 
   const handleCreate = async (data: {
@@ -21,24 +25,34 @@ function Tasks() {
     setTasks((prev) => [newTask, ...prev]);
   };
 
-   const handleDelete = (id: number) => {
+  const handleDelete = async (id: number) => {
+    const confirm = window.confirm("Tem certeza que deseja excluir esta task?");
 
+    if (!confirm) return;
+
+    try {
+      await deleteTask(id);
+      setTasks((prev) => prev.filter((task) => task.id !== id));
+    } catch (error) {
+      alert("Erro ao deletar task");
+    }
   };
-   const handleUpdate = async (
-  id: number,
-  data: TaskUpdate
-) => {
-  const updated = await updateTask(id, data);
 
-  setTasks((prev) =>
-    prev.map((t) => (t.id === id ? updated : t))
-  );
-};
+  const handleUpdate = async (
+    id: number,
+    data: TaskUpdate
+  ) => {
+    const updated = await updateTask(id, data);
+
+    setTasks((prev) =>
+      prev.map((t) => (t.id === id ? updated : t))
+    );
+  };
 
   return (
-    <Box p={4}>
+    <Box >
       <CreateTask onCreate={handleCreate} />
-       <TaskList tasks={tasks} onDelete={handleDelete} onEdit={handleUpdate}/>
+      <TaskList tasks={tasks} onDelete={handleDelete} onUpDate={handleUpdate} />
     </Box>
   );
 }

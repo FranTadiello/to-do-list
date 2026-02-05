@@ -8,10 +8,10 @@ import { EditTask } from "./editTask";
 interface TaskItemProps {
     task: Task;
     onDelete: (id: number) => void;
-    onEdit: (id: number, data: TaskUpdate) => void;
+    onUpDate: (id: number, data: TaskUpdate) => void;
 }
 
-export function TaskItem({ task, onDelete, onEdit }: TaskItemProps) {
+export function TaskItem({ task, onDelete, onUpDate }: TaskItemProps) {
     const [openEdit, setOpenEdit] = useState(false);
 
     return (
@@ -64,7 +64,7 @@ export function TaskItem({ task, onDelete, onEdit }: TaskItemProps) {
                 task={task}
                 onClose={() => setOpenEdit(false)}
                 onSave={(data) => {
-                    onEdit(task.id, data);
+                    onUpDate(task.id, data);
                     setOpenEdit(false);
                 }}
             />

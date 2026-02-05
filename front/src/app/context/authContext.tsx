@@ -3,7 +3,6 @@ import { login as loginService } from "../services/auth.service";
 
 interface AuthContextData {
   token: string | null;
-  isAuthenticated: boolean;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
 }
@@ -20,7 +19,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async (username: string, password: string) => {
     const response = await loginService({ username, password });
-
     localStorage.setItem("token", response.access_token);
     setToken(response.access_token);
   };
@@ -34,7 +32,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     <AuthContext.Provider
       value={{
         token,
-        isAuthenticated: !!token,
         login,
         logout,
       }}
