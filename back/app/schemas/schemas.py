@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
+from typing import Optional
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -26,3 +27,8 @@ class TaskResponse(TaskBase):
 
     class Config:
         from_attributes = True
+        
+class TaskUpdate(BaseModel):
+    titulo: Optional[str] = None
+    descricao: Optional[str] = None
+    status: Optional[str] = None
