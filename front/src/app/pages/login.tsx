@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import { login } from "../services/auth.service";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,7 +19,7 @@ function Login() {
 
       localStorage.setItem("token", responseToken.access_token);
       alert("Login realizado com sucesso!");
-      window.location.reload();
+      navigate("/tasks");
     } catch (error) {
       alert("Erro ao fazer login");
     }
