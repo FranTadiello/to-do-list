@@ -1,6 +1,5 @@
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 function Header() {
@@ -8,10 +7,10 @@ function Header() {
 
     return (
         <> <AppBar position="static"
-            sx={{ backgroundColor: "gainsboro", color: "black", boxShadow: 2, px: 2, }}
+            sx={{ backgroundColor: "white", color: "black",  px: 2, py: 2, boxShadow: 'none'}}
         >
             <Toolbar>
-                <Typography variant="h6" fontWeight="bold" sx={{ flexGrow: 1 }}
+                <Typography variant="h5" fontWeight="bold" sx={{ flexGrow: 1 }}
                 >
                     TO‑DO‑LIST
                 </Typography>
@@ -22,7 +21,6 @@ function Header() {
                 </Button>
             </Toolbar>
         </AppBar>
-            <Outlet />
         </>
     );
 }

@@ -3,6 +3,7 @@ import Login from "../pages/login";
 import Tasks from "../pages/task";
 import { PrivateRoute } from "./PrivateRoute";
 import Register from "../pages/register";
+import { AppLayout } from "../layouts/AppLayout";
 
 export function AppRoutes() {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -28,7 +29,9 @@ export function AppRoutes() {
         <Route path="/tasks"
           element={
             <PrivateRoute>
-              <Tasks />
+              <AppLayout>
+                <Tasks />
+              </AppLayout>
             </PrivateRoute>
           }
         />
