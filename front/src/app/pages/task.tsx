@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getTasks } from "../services/task.service";
 import type {Task} from "../types/task";
+import Header from "../components/header";
+
 
 function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -16,6 +18,7 @@ function Tasks() {
 
   return (
     <div>
+      <Header/>
       <h2>Minhas Tasks</h2>
 
       <ul>

@@ -7,9 +7,6 @@ export const login = async (data: LoginData): Promise<LoginResponse> => {
   formData.append("password", data.password);
 
   const response = await api.post<LoginResponse>("/auth/login", formData);
- 
- 
-  console.log("Resposta login:", response.data);
 
   return response.data;
 };
