@@ -1,4 +1,4 @@
-import { Box,IconButton,Paper,Typography } from "@mui/material";
+import { Box, IconButton, Paper, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
@@ -13,6 +13,17 @@ interface TaskItemProps {
 
 export function TaskItem({ task, onDelete, onUpDate }: TaskItemProps) {
     const [openEdit, setOpenEdit] = useState(false);
+
+    function formatDate(dateString: string): string {
+        const date = new Date(dateString);
+
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = date.getFullYear();
+
+        return `${day}/${month}/${year}`;
+    }
+
 
     return (
         <>
@@ -44,6 +55,10 @@ export function TaskItem({ task, onDelete, onUpDate }: TaskItemProps) {
                             {task.descricao}
                         </Typography>
 
+                        <Typography color="text.secondary" sx={{ flex: 1 }}>
+                            Criado em: {formatDate(task.data_criacao)}
+                        </Typography>
+
                         <Typography color="text.secondary" sx={{ minWidth: 80 }}>
                             {task.status}
                         </Typography>
@@ -58,7 +73,7 @@ export function TaskItem({ task, onDelete, onUpDate }: TaskItemProps) {
                     </IconButton>
                 </Box>
             </Paper>
-            
+
             <EditTask
                 open={openEdit}
                 task={task}

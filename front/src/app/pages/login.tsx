@@ -53,7 +53,7 @@ function Login() {
           TO-DO-LIST
         </Typography>
 
-        <Typography mt={2} maxWidth={360} textAlign="left">
+        <Typography mt={2} maxWidth={360} textAlign="center">
           Organize suas tarefas, acompanhe seu progresso
           e mantenha tudo sob controle.
         </Typography>

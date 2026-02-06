@@ -9,8 +9,10 @@ interface AppLayoutProps {
 export function AppLayout({ children }: AppLayoutProps) {
   return (
     <>
-      <Header />
-      <Box maxWidth="md" mx="auto">
+      <Box maxWidth="xl" mx="auto">
+        <Header />
+      </Box>
+      <Box maxWidth="xl" mx="auto" >
         {children}
       </Box>
     </>

@@ -7,7 +7,7 @@ function Header() {
 
     return (
         <> <AppBar position="static"
-            sx={{ backgroundColor: "white", color: "black",  px: 2, py: 2, boxShadow: 'none'}}
+            sx={{ backgroundColor: "white", color: "black",  py: 2, boxShadow: 'none'}}
         >
             <Toolbar>
                 <Typography variant="h5" fontWeight="bold" sx={{ flexGrow: 1 }}

@@ -58,7 +58,7 @@ function Register() {
           TO‑DO‑LIST
         </Typography>
 
-        <Typography mt={2} maxWidth={360} textAlign="left">
+        <Typography mt={2} maxWidth={360} textAlign="center">
           Cadastre-se para começar a organizar suas tarefas
           e manter tudo sob controle.
         </Typography>
