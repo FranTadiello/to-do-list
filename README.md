@@ -71,14 +71,18 @@ Pré-requisitos:
    ```bash
    pip install -r requirements.txt
    ```
+5. Verifique sua pasta .env:
 
-5. Execute o servidor FastAPI:
+   Crie um arquivo .env na raiz do back-end conforme o .env.example
+
+
+6. Execute o servidor FastAPI:
 
    ```bash
    uvicorn app.main:app --reload
    ```
 
-6. Verifique se o backend está funcionando:
+7. Verifique se o backend está funcionando:
    API: http://localhost:8000
    Swagger: http://localhost:8000/docs
 
