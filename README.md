@@ -34,6 +34,17 @@ Frontend:
 
 ---
 
+# Mockup de Referência
+As telas abaixo (Login e Lista de Tarefas) foram usadas como **base visual** para o desenvolvimento da aplicação, não sendo idênticas ao resultado final. 
+
+### Tela de Login 
+<img src="assets/login.png" alt="Tela de Login" width="400"/>
+
+### Tela de Lista de Tarefas 
+<img src="assets/tasks.png" alt="Tela de Lista de Tarefas" width="400"/>
+
+---
+
 # Como Executar o Projeto Localmente
 
 Supondo que você já clonou o repositório na sua máquina.
